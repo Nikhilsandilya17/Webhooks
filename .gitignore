@@ -1,35 +1,41 @@
 # Build output
-/build/
-/out/
-/target/
+build/
+out/
+target/
+bin/
+
+# Gradle
+.gradle/
+gradle/
 
 # IDE files
 .idea/
 *.iml
+*.ipr
+*.iws
 .vscode/
+.classpath
+.project
+.settings/
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Dependency and wrapper files
-/libs/
-/gradle/
+# Compiled files
+*.class
 *.jar
 *.war
-*.class
+*.ear
 
-# Optional: logs, temp, reports
+# Logs and reports
 *.log
-/tmp/
-/reports/
-/test-results/
+logs/
 
-# Keep source and config files tracked
-#!src/
-#!build.gradle
-#!settings.gradle
-#!docker-compose.yml
-#!HELP.md
-#!TUTORIAL.md
+# Gradle wrapper (keep the wrapper JAR if you want it)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
+# Keep gradlew scripts
+!gradlew
+!gradlew.bat
