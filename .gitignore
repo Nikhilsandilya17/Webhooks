@@ -1,0 +1,35 @@
+# Build output
+/build/
+/out/
+/target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependency and wrapper files
+/libs/
+/gradle/
+*.jar
+*.war
+*.class
+
+# Optional: logs, temp, reports
+*.log
+/tmp/
+/reports/
+/test-results/
+
+# Keep source and config files tracked
+#!src/
+#!build.gradle
+#!settings.gradle
+#!docker-compose.yml
+#!HELP.md
+#!TUTORIAL.md
+
