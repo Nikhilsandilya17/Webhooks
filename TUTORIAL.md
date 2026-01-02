@@ -156,3 +156,6 @@ A Webhook is technically just a standard **REST API call**, but the direction is
 4. **The Processing (Async Layer):**
 * *Real Life:* Starbucks updates the order status to "PAID".
 * *Code:* The Controller pushes the event to **Kafka**. The Consumer reads it, checks **Redis** for duplicates, and updates **MySQL**.
+
+
+Ex: BookMyShow - The payment (along with the bookingId) gets sent to Stripe/PhonePe for processing and Stripe responds 'VIA' Webhook/CallbackURL that the payment was successful.
