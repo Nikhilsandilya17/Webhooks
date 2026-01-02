@@ -53,12 +53,12 @@ Run the `WebhookSenderSimulator.java` to simulate incoming payment webhooks.
 
 ### 4. Monitoring
 
-* **Kafka UI:** [http://localhost:9090](https://www.google.com/search?q=http://localhost:9090) (View Topics & Messages)
-* **MySQL UI (phpMyAdmin):** [http://localhost:8081](https://www.google.com/search?q=http://localhost:8081)
+* **Kafka UI:** [http://localhost:9090] (View Topics & Messages)
+* **MySQL UI (phpMyAdmin):** [http://localhost:8081]
 * *User:* `root` | *Pass:* `root`
 
 
-* **Redis UI:** [http://localhost:8082](https://www.google.com/search?q=http://localhost:8082)
+* **Redis UI:** [http://localhost:8082]
 
 ---
 
