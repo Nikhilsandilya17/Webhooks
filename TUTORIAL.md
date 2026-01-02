@@ -37,7 +37,13 @@ Integrating Kafka transforms the application from a **Synchronous System** (wher
 Run the following command to start Kafka, Zookeeper, Redis, MySQL, and their respective UIs:
 
 ```bash
-docker-compose up -d
+  docker compose up -d
+
+```
+run the below command to verify all containers are running.
+
+```bash
+  docker-ps
 
 ```
 
@@ -45,7 +51,7 @@ docker-compose up -d
 
 Start the Spring Boot application (`WebhookApplication.java`).
 
-> **Note:** The `@Bean` annotation automatically configures `KafkaTemplate<String, Object>` in the application context. When the controller requests `@Autowired KafkaTemplate`, Spring injects the correctly configured bean.
+> **Note:** The `@Bean` annotation in KafkaConfig automatically configures `KafkaTemplate<String, Object>` in the application context. When the controller requests `@Autowired KafkaTemplate`, Spring injects the correctly configured bean.
 
 ### 3. Trigger Events
 
@@ -158,4 +164,4 @@ A Webhook is technically just a standard **REST API call**, but the direction is
 * *Code:* The Controller pushes the event to **Kafka**. The Consumer reads it, checks **Redis** for duplicates, and updates **MySQL**.
 
 
-Ex: BookMyShow - The payment (along with the bookingId) gets sent to Stripe/PhonePe for processing and Stripe responds 'VIA' Webhook/CallbackURL that the payment was successful.
+Ex: BookMyShow - The payment (along with the bookingId) gets sent to Stripe/PhonePe for processing and Stripe responds *"VIA"*  Webhook/CallbackURL that the payment was successful.

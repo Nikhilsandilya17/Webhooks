@@ -26,12 +26,12 @@ public class PaymentService {
     private ProcessedEventRepository paymentEventRepository;
 
     @Autowired
-    private StringRedisTemplate redisTemplate; // <--- The new tool
+    private StringRedisTemplate redisTemplate;
 
     @Transactional
     public void processPaymentSuccess(PaymentEvent paymentEvent) {
-        String paymentEventId = paymentEvent.getEventId();
-        String lockKey = "idempotency_" + paymentEventId;
+        //Idempotency check
+        String lockKey = "idempotency_" + paymentEvent.getEventId();;
 
         // --- STEP 1: FAST REDIS CHECK ---
         // Try to save the key. 
@@ -39,12 +39,12 @@ public class PaymentService {
         // If it returns FALSE: It already exists. Duplicate!
         Boolean isNew = redisTemplate.opsForValue().setIfAbsent(lockKey, "LOCKED", Duration.ofHours(24));
         if (Boolean.FALSE.equals(isNew)) {
-            log.info("Redis: Duplicate Event " + paymentEventId + " blocked.");
+            log.info("Redis: Duplicate Event {} blocked.", paymentEvent.getEventId());
             return;
         }
         try {
             // --- STEP 2: PROCESSING ---
-            log.info("Processing Payment for: " + paymentEvent.getCustomerId());
+            log.info("Processing Payment for: {}", paymentEvent.getCustomerId());
             CustomerOrder customerOrder = customerOrderRepository.findByCustomerId(paymentEvent.getCustomerId());
             if(Objects.isNull(customerOrder)){
                 customerOrder = new CustomerOrder();
@@ -55,7 +55,7 @@ public class PaymentService {
             customerOrder.setStatus("PAID");
             customerOrderRepository.save(customerOrder);
             // --- STEP 3: AUDIT LOG (Optional but recommended) We still save to MySQL for permanent history, but we don't READ from it for checking.
-            paymentEventRepository.save(new ProcessedEvent(paymentEventId, LocalDateTime.now()));
+            paymentEventRepository.save(new ProcessedEvent(paymentEvent.getEventId(), LocalDateTime.now()));
             log.info("DATABASE: Order updated successfully.");
 
         } catch (Exception e) {
