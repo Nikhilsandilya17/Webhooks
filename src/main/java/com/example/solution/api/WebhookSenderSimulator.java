@@ -35,7 +35,12 @@ public class WebhookSenderSimulator {
 
             //Send Request
             HttpClient httpClient = HttpClient.newHttpClient();
-            HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(TARGET_URL)).header("Content-Type", "application/json").header("X-Signature", signature).POST(HttpRequest.BodyPublishers.ofString(jsonPayload)).build();
+            HttpRequest httpRequest = HttpRequest.newBuilder()
+                    .uri(URI.create(TARGET_URL))
+                    .header("Content-Type", "application/json")
+                    .header("X-Signature", signature)
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                    .build();
 
             log.info("Sending Webhook..");
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
